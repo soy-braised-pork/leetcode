@@ -38,4 +38,15 @@ public class MyLinkedList<E> {
         tail.prev = x;
         size++;
     }
+
+    public void addFirst(E e) {
+        Node<E> x = new Node<>(e);
+        Node<E> temp = head.next;
+        temp.prev = x;
+        x.next = temp;
+
+        head.next = x;
+        x.prev = head;
+        size++;
+    }
 }
