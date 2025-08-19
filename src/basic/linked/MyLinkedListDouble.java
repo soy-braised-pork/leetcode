@@ -127,6 +127,7 @@ public class MyLinkedListDouble<E> {
         list.add(2, 100);
 
         list.display();
+
         // size = 5
         // 0 <-> 1 <-> 100 <-> 2 -> 3 -> null
     }

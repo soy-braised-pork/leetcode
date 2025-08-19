@@ -182,6 +182,7 @@ public class MyLinkedListSingle<E> {
         return p;
     }
 
+
     public static void main(String[] args) {
         MyLinkedListSingle<Integer> list = new MyLinkedListSingle<>();
         list.addFirst(1);
