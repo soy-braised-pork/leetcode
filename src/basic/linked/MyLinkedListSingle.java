@@ -4,7 +4,7 @@ import java.util.NoSuchElementException;
 
 /**
  * @author zhulx
- * 双链表
+ * 单链表
  **/
 public class MyLinkedListSingle<E> {
 

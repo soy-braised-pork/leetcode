@@ -1,5 +1,7 @@
 package basic.linked;
 
+import java.util.NoSuchElementException;
+
 /**
  * @author zhulx
  * 双链表
@@ -8,7 +10,6 @@ public class MyLinkedListDouble<E> {
     // 虚拟头尾节点
     final private Node<E> head, tail;
     private int size;
-
 
 
     // 双链表节点
@@ -39,7 +40,7 @@ public class MyLinkedListDouble<E> {
         Node<E> temp = tail.prev;
         temp.next = x;
         x.prev = temp;
-        x.next=tail;
+        x.next = tail;
         tail.prev = x;
         size++;
     }
@@ -76,7 +77,103 @@ public class MyLinkedListDouble<E> {
         size++;
     }
 
+    // 删
+    public E removeFirst() {
+        if (size < 1) {
+            throw new NoSuchElementException();
+        }
+        Node<E> x = head.next;
+        Node<E> temp = x.next;
+        head.next = temp;
+        temp.prev = head;
+
+        E val = x.val;
+        x.prev = null;
+        x.next = null;
+
+        size--;
+        return val;
+    }
+
+    public E removeLast() {
+        if (size < 1) {
+            throw new NoSuchElementException();
+        }
+        Node<E> x = tail.prev;
+        Node<E> temp = tail.prev.prev;
+
+        tail.prev = temp;
+        temp.next = tail;
+
+        E val = x.val;
+        x.prev = null;
+        x.next = null;
+
+        size--;
+        return val;
+    }
+
+    public E remove(int index) {
+        checkElementIndex(index);
+        // 找到 index 对应的 Node
+        Node<E> x = getNode(index);
+        Node<E> prev = x.prev;
+        Node<E> next = x.next;
+
+        prev.next = next;
+        next.prev = prev;
+
+        E val = x.val;
+        x.prev = null;
+        x.next = null;
+
+        size--;
+        return val;
+    }
+
+    // 查
+    public E get(int index) {
+        checkElementIndex(index);
+        Node<E> p = getNode(index);
+
+        return p.val;
+    }
+
+    public E getFirst() {
+        if (size < 1) {
+            throw new NoSuchElementException();
+        }
+        return head.next.val;
+    }
+
+    public E getLast() {
+        if (size < 1) {
+            throw new NoSuchElementException();
+        }
+        return tail.prev.val;
+    }
+
+
+    // 改
+    public E set(int index, E val) {
+        checkElementIndex(index);
+        //找到对应位置的node
+        Node<E> p = getNode(index);
+        E oldVal = p.val;
+        p.val = val;
+        return oldVal;
+    }
+
     // 其他工具函数
+
+    public int size() {
+        return size;
+    }
+
+    public boolean isEmpty() {
+        return size == 1;
+    }
+
     public Node<E> getNode(int index) {
         checkElementIndex(index);
         Node<E> p = head.next;
@@ -86,26 +183,27 @@ public class MyLinkedListDouble<E> {
         return p;
     }
 
+
     // 检查索引位置
-    private boolean isElementIndex(int index){
+    private boolean isElementIndex(int index) {
         return index >= 0 && index < size;
     }
 
-    private boolean isPositionIndex(int index){
+    private boolean isPositionIndex(int index) {
         return index >= 0 && index <= size;
     }
 
     // 检查 index 索引位置是否可以存在元素
     private void checkElementIndex(int index) {
-        if(!isElementIndex(index)){
-            throw new IndexOutOfBoundsException("Index:"+index+" ,Size:"+size);
+        if (!isElementIndex(index)) {
+            throw new IndexOutOfBoundsException("Index:" + index + " ,Size:" + size);
         }
     }
 
     // 检查 index 索引位置是否可以添加元素
-    private void checkPositionIndex(int index){
-        if(!isPositionIndex(index)){
-            throw new IndexOutOfBoundsException("Index:"+index+" ,Size:"+size);
+    private void checkPositionIndex(int index) {
+        if (!isPositionIndex(index)) {
+            throw new IndexOutOfBoundsException("Index:" + index + " ,Size:" + size);
         }
     }
 
