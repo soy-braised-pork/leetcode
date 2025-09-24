@@ -4,10 +4,10 @@ package basic.linked;
  * @author zhulx
  **/
 public class CirlinkedList {
-    static class ListNode {
-      int val;
-      ListNode next;
-      ListNode(int x) {
+    public static class ListNode {
+      public int val;
+      public ListNode next;
+      public ListNode(int x) {
          val = x;
          next = null;
       }
