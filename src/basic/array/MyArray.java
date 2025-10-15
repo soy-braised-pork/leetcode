@@ -38,6 +38,9 @@ public class MyArray {
     // 改
 
     // 查
+    private int checkhSize(int[] arr){
+        return arr.length;
+    }
 
     public static void main(String[] args) {
         int[] arr = {1, 2, 3, 4};
